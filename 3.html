@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Автомобили</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="image"><img src="Audi-Logo.png" alt="photo" ></div>
+    <h1><font size="7"  face="Arial">Наши автомобили</font></h1>
+
+    <div class="row">
+        <div class="column">
+            <div id="posts">
+                <div class="card">
+                    <h2>Audi RS6</h2>
+                    <div class="image"><img src="1-Audi-RS6.jpg" alt="photo" ></div>
+                    <p>Audi RS 6 — спортивный автомобиль выпускаемый подразделением Audi Sport GmbH (ранее quattro GmbH) на платформе Audi A6. </p>
+                </div>
+                <div class="card">
+                    <h2>Audi A8</h2>
+                    <div class="image"><img src="2022-audi-a8-103-1644872258.jpg" alt="photo" ></div>
+                    <p>Audi A8 — автомобиль представительского класса производимый концерном Audi AG в городе Неккарзульм, Германия, преемник модели Audi V8.</p>
+                </div>
+                <div class="card">
+                    <h2>Audi S7</h2>
+                    <div class="image"><img src="2023-audi-s7-design-edition-102-1652282686.jpg" alt="photo"></div>
+                    <p>Audi S7 2022 – это обновлённое спортивное купе премиум-класса, созданное на базе известной модели Audi A7.</p>
+                </div>
+                <div class="card">
+                    <h2>Audi A3</h2>
+                    <div class="image"><img src="A201895_x500.jpg" alt="photo"></div>
+                    <p>Audi A3 — хэтчбэк малого семейного класса, производимый концерном Audi с 1996 года.</p>
+                </div>
+                <div class="card">
+                    <h2>Audi R8</h2>
+                    <div class="image"><img src="AUDI_R8-V10-performance-RWD-2021_main.jpg" alt="photo"></div>
+                    <p>Audi R8 — среднемоторный полноприводный спортивный автомобиль, производимый немецким автопроизводителем Audi с 2007 года. </p>
+                </div>
+            </div>
+            <button id="load" class="gradient-button">Загрузить еще</button>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $('#load').click(function() {
+            let tek = $('.card').length + 1;
+
+            $.ajax({
+                url: 'getdata_3.php',               
+                method: 'GET',                      
+                data: { kol: 5, tek: tek },         
+                success: function (response) {      
+                    var data = JSON.parse(response);
+                    data.forEach(function(item) {
+                        $('#posts').append(`
+                            <div class="card">
+                                <h2>${item.title}</h2>
+                                <div class="image"><img src="audi-logo-2.png" alt="photo"></div>
+                                <p>${item.content}</p>
+                            </div>
+                        `);
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
